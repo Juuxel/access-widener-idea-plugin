@@ -1,4 +1,4 @@
-package juuxel.accesswidener.idea
+package juuxel.accesswidener.idea.syntaxhighlighting
 
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.fileTypes.SyntaxHighlighter

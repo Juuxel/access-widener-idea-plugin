@@ -1,10 +1,11 @@
-package juuxel.accesswidener.idea
+package juuxel.accesswidener.idea.syntaxhighlighting
 
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
 import com.intellij.psi.tree.IElementType
+import juuxel.accesswidener.idea.AccessWidenerLexerAdapter
 import juuxel.accesswidener.idea.psi.AwTypes
 import org.jetbrains.kotlin.idea.highlighter.KotlinHighlightingColors
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors as BaseColors

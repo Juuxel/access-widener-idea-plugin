@@ -30,11 +30,11 @@
                                 implementationClass="juuxel.accesswidener.idea.completion.AwCompletionContributor"/>
 
         <lang.syntaxHighlighterFactory language="AccessWidener"
-                                       implementationClass="juuxel.accesswidener.idea.AccessWidenerSyntaxHighlighterFactory"/>
+                                       implementationClass="juuxel.accesswidener.idea.syntaxhighlighting.AccessWidenerSyntaxHighlighterFactory"/>
 
-        <annotator language="AccessWidener" implementationClass="juuxel.accesswidener.idea.AccessWidenerAnnotator"/>
+        <annotator language="AccessWidener" implementationClass="juuxel.accesswidener.idea.syntaxhighlighting.AccessWidenerAnnotator"/>
 
-        <colorSettingsPage implementation="juuxel.accesswidener.idea.AccessWidenerColorSettingsPage"/>
+        <colorSettingsPage implementation="juuxel.accesswidener.idea.syntaxhighlighting.AccessWidenerColorSettingsPage"/>
 
         <localInspection language="AccessWidener"
                          displayName="Invalid access type"

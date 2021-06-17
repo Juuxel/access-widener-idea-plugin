@@ -1,4 +1,4 @@
-package juuxel.accesswidener.idea
+package juuxel.accesswidener.idea.syntaxhighlighting
 
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.Annotator
