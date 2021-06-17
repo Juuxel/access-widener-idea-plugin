@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>io.github.juuxel.access-widener</id>
     <name>Access Widener</name>
-    <vendor url="https://github.com/architectury">Architectury</vendor>
+    <vendor url="https://github.com/Juuxel">Juuxel</vendor>
 
     <description><![CDATA[
     Adds support for Fabric access widener (.accesswidener) files.
