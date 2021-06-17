@@ -35,6 +35,20 @@
         <annotator language="AccessWidener" implementationClass="juuxel.accesswidener.idea.AccessWidenerAnnotator"/>
 
         <colorSettingsPage implementation="juuxel.accesswidener.idea.AccessWidenerColorSettingsPage"/>
+
+        <localInspection language="AccessWidener"
+                         displayName="Invalid access type"
+                         groupName="Access wideners"
+                         enabledByDefault="true"
+                         level="ERROR"
+                         implementationClass="juuxel.accesswidener.idea.inspection.InvalidAccessTypeInspection"/>
+
+        <localInspection language="AccessWidener"
+                         displayName="Unsupported target type"
+                         groupName="Access wideners"
+                         enabledByDefault="true"
+                         level="ERROR"
+                         implementationClass="juuxel.accesswidener.idea.inspection.InvalidTargetTypeInspection"/>
     </extensions>
 
     <actions>
