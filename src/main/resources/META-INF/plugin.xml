@@ -1,0 +1,43 @@
+<idea-plugin>
+    <id>io.github.juuxel.access-widener</id>
+    <name>Access Widener</name>
+    <vendor url="https://github.com/architectury">Architectury</vendor>
+
+    <description><![CDATA[
+    Adds support for Fabric access widener (.accesswidener) files.
+    ]]></description>
+
+    <change-notes><![CDATA[
+    Initial release.
+    ]]></change-notes>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.java</depends>
+    <depends>org.jetbrains.kotlin</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="Access Widener"
+                  implementationClass="juuxel.accesswidener.idea.AccessWidenerFileType"
+                  fieldName="INSTANCE"
+                  language="AccessWidener"
+                  extensions="accesswidener"/>
+
+        <lang.parserDefinition language="AccessWidener"
+                               implementationClass="juuxel.accesswidener.idea.AccessWidenerParserDefinition"/>
+
+        <completion.contributor language="AccessWidener"
+                                implementationClass="juuxel.accesswidener.idea.completion.AwCompletionContributor"/>
+
+        <lang.syntaxHighlighterFactory language="AccessWidener"
+                                       implementationClass="juuxel.accesswidener.idea.AccessWidenerSyntaxHighlighterFactory"/>
+
+        <annotator language="AccessWidener" implementationClass="juuxel.accesswidener.idea.AccessWidenerAnnotator"/>
+
+        <colorSettingsPage implementation="juuxel.accesswidener.idea.AccessWidenerColorSettingsPage"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>

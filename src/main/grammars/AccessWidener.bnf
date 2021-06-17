@@ -1,0 +1,69 @@
+{
+    parserClass="juuxel.accesswidener.idea.parser.AccessWidenerParser"
+    extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+    psiClassPrefix="Aw"
+    psiImplClassSuffix="Impl"
+    psiPackage="juuxel.accesswidener.idea.psi"
+    psiImplPackage="juuxel.accesswidener.idea.psi.impl"
+
+    elementTypeHolderClass="juuxel.accesswidener.idea.psi.AwTypes"
+    elementTypeClass="juuxel.accesswidener.idea.psi.AwElementType"
+    tokenTypeClass="juuxel.accesswidener.idea.psi.AwTokenType"
+
+    psiImplUtilClass="juuxel.accesswidener.idea.psi.impl.AwPsiImplUtil"
+
+    // Extensions
+    extends("(class|member)Definition")=definition
+    extends("(method|field)Definition")=memberDefinition
+
+    generateTokenAccessors=false
+    tokens=[
+        COMMENT="regexp:#.+"
+        HEADER_START="accessWidener"
+
+        ARRAY="["
+        LITERAL_START="L"
+        SEMICOLON=";"
+        L_PAREN="("
+        R_PAREN=")"
+    ]
+    // Tokens. These could be used to generate the lexer, but the handwritten one is better.
+    /*tokens = [
+        VERSION_START="v"
+        NUMBER="regexp:\d+"
+        NAMESPACE="regexp:[a-zA-Z0-9_]+"
+
+        ACCESS="regexp:accessible|extendable|mutable"
+        CLASS_DEF="class"
+        METHOD_DEF="method"
+        FIELD_DEF="field"
+
+        CLASS_NAME="regexp:[a-zA-Z0-9-_$/]+"
+        MEMBER_NAME="regexp:[a-zA-Z0-9-_$<>]+"
+        PRIMITIVE_DESCRIPTOR="regexp:[BSIJFDZV]"
+
+        COMMENT="regexp:#.+"
+        //HS="regexp:[ \t]+"
+        LINE_BREAK="regexp:\r\n|\n|\r"
+    ]*/
+}
+
+accessWidener ::= header line_*
+
+header ::= HEADER_START VERSION NAMESPACE {methods=[getVersionNumber getNamespace]}
+
+private line_ ::= definition_|COMMENT {recoverWhile=lineRecover_}
+private definition_ ::= methodDefinition|fieldDefinition|classDefinition {recoverWhile=lineRecover_}
+private lineRecover_ ::= !(ACCESS|COMMENT)
+
+classDefinition ::= ACCESS TARGET_TYPE CLASS_NAME
+methodDefinition ::= ACCESS TARGET_TYPE CLASS_NAME MEMBER_NAME methodDescriptor {pin=5}
+fieldDefinition ::= ACCESS TARGET_TYPE CLASS_NAME MEMBER_NAME typeDescriptor {pin=5}
+
+fake memberDefinition ::= {methods=[getOwner getMemberIdentifier]}
+fake definition ::= {methods=[getAccessType getName]}
+
+methodDescriptor ::= L_PAREN typeDescriptor* R_PAREN typeDescriptor {methods=[getReturnType getParameters]}
+typeDescriptor ::= literalTypeDescriptor_|PRIMITIVE_DESCRIPTOR|ARRAY typeDescriptor {methods=[getDescriptorString isPrimitive isLiteral getClassName]}
+private literalTypeDescriptor_ ::= LITERAL_START CLASS_NAME SEMICOLON
