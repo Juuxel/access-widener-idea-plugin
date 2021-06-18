@@ -7,8 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface AwMemberDefinition extends AwDefinition {
 
-  @Nullable String getOwner();
+  @Nullable
+  String getOwner();
 
-  @Nullable PsiElement getMemberIdentifier();
+  @Nullable
+  PsiElement getMemberIdentifier();
 
 }

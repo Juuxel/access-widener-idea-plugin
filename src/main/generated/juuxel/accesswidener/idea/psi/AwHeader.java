@@ -7,8 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface AwHeader extends PsiElement {
 
-  @Nullable Integer getVersionNumber();
+  @Nullable
+  Integer getVersionNumber();
 
-  @Nullable String getNamespace();
+  @Nullable
+  String getNamespace();
 
 }

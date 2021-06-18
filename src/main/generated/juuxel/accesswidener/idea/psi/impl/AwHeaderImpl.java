@@ -28,12 +28,14 @@ public class AwHeaderImpl extends ASTWrapperPsiElement implements AwHeader {
   }
 
   @Override
-  public @Nullable Integer getVersionNumber() {
+  @Nullable
+  public Integer getVersionNumber() {
     return AwPsiImplUtil.getVersionNumber(this);
   }
 
   @Override
-  public @Nullable String getNamespace() {
+  @Nullable
+  public String getNamespace() {
     return AwPsiImplUtil.getNamespace(this);
   }
 

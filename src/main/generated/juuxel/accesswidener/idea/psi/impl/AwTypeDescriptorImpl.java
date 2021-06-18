@@ -33,7 +33,8 @@ public class AwTypeDescriptorImpl extends AwReferencingElementImpl implements Aw
   }
 
   @Override
-  public @NotNull String getDescriptorString() {
+  @NotNull
+  public String getDescriptorString() {
     return AwPsiImplUtil.getDescriptorString(this);
   }
 
@@ -48,7 +49,8 @@ public class AwTypeDescriptorImpl extends AwReferencingElementImpl implements Aw
   }
 
   @Override
-  public @Nullable String getClassName() {
+  @Nullable
+  public String getClassName() {
     return AwPsiImplUtil.getClassName(this);
   }
 

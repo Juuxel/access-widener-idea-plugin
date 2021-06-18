@@ -10,12 +10,14 @@ public interface AwTypeDescriptor extends PsiElement {
   @Nullable
   AwTypeDescriptor getTypeDescriptor();
 
-  @NotNull String getDescriptorString();
+  @NotNull
+  String getDescriptorString();
 
   boolean isPrimitive();
 
   boolean isLiteral();
 
-  @Nullable String getClassName();
+  @Nullable
+  String getClassName();
 
 }

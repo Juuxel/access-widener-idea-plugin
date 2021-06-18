@@ -28,12 +28,14 @@ public class AwMemberDefinitionImpl extends AwDefinitionImpl implements AwMember
   }
 
   @Override
-  public @Nullable String getOwner() {
+  @Nullable
+  public String getOwner() {
     return AwPsiImplUtil.getOwner(this);
   }
 
   @Override
-  public @Nullable PsiElement getMemberIdentifier() {
+  @Nullable
+  public PsiElement getMemberIdentifier() {
     return AwPsiImplUtil.getMemberIdentifier(this);
   }
 

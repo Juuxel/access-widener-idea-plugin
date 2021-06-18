@@ -28,12 +28,14 @@ public class AwDefinitionImpl extends AwReferencingElementImpl implements AwDefi
   }
 
   @Override
-  public @Nullable AccessType getAccessType() {
+  @Nullable
+  public AccessType getAccessType() {
     return AwPsiImplUtil.getAccessType(this);
   }
 
   @Override
-  public @Nullable String getName() {
+  @Nullable
+  public String getName() {
     return AwPsiImplUtil.getName(this);
   }
 

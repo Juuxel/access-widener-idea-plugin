@@ -8,8 +8,10 @@ import juuxel.accesswidener.idea.AccessType;
 
 public interface AwDefinition extends PsiElement {
 
-  @Nullable AccessType getAccessType();
+  @Nullable
+  AccessType getAccessType();
 
-  @Nullable String getName();
+  @Nullable
+  String getName();
 
 }
