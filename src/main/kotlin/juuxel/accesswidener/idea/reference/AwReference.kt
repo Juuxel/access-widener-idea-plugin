@@ -10,18 +10,17 @@ import com.intellij.psi.PsiPolyVariantReference
 import com.intellij.psi.PsiReferenceBase
 import com.intellij.psi.ResolveResult
 import com.intellij.psi.search.GlobalSearchScope
+import juuxel.accesswidener.idea.util.Types
 
 abstract class AwReference(element: PsiElement, textRange: TextRange) :
     PsiReferenceBase<PsiElement>(element, textRange),
     PsiPolyVariantReference {
     private val javaName by lazy {
-        // If you have a manual $ in your class names, you are evil.
-        // TODO: Should I actually generate the full set of $->. permutations?
-        classNameRange.substring(element.text).replace('/', '.').replace('$', '.')
+        Types.toJavaName(classBinaryName)
     }
 
-    protected abstract val classNameRange: TextRange
-    protected abstract fun getReferenceTargets(c: PsiClass): Sequence<PsiElement>
+    protected abstract val classBinaryName: String
+    protected abstract fun getReferenceTargets(c: PsiClass, soft: Boolean): Sequence<PsiElement>
 
     override fun multiResolve(incompleteCode: Boolean): Array<ResolveResult> {
         val scope = run {
@@ -37,7 +36,7 @@ abstract class AwReference(element: PsiElement, textRange: TextRange) :
         return JavaPsiFacade.getInstance(element.project)
             .findClasses(javaName, scope)
             .asSequence()
-            .flatMap { getReferenceTargets(it) }
+            .flatMap { getReferenceTargets(it, false) }
             .map { PsiElementResolveResult(it) }
             .toList()
             .toTypedArray()
@@ -49,6 +48,6 @@ abstract class AwReference(element: PsiElement, textRange: TextRange) :
     override fun getVariants(): Array<out Any> =
         JavaPsiFacade.getInstance(element.project)
             .findClasses(javaName, GlobalSearchScope.allScope(element.project))
-            .flatMap { getReferenceTargets(it) }
+            .flatMap { getReferenceTargets(it, true) }
             .toTypedArray()
 }

@@ -7,10 +7,13 @@ import com.intellij.psi.PsiElement;
 
 public interface AwMemberDefinition extends AwDefinition {
 
-  @Nullable
+  @NotNull
   String getOwner();
 
-  @Nullable
+  @NotNull
   PsiElement getMemberIdentifier();
+
+  @NotNull
+  String getName();
 
 }

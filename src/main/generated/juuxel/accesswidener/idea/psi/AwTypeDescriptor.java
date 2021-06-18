@@ -4,6 +4,7 @@ package juuxel.accesswidener.idea.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiType;
 
 public interface AwTypeDescriptor extends PsiElement {
 
@@ -19,5 +20,8 @@ public interface AwTypeDescriptor extends PsiElement {
 
   @Nullable
   String getClassName();
+
+  @Nullable
+  PsiType toPsiType();
 
 }

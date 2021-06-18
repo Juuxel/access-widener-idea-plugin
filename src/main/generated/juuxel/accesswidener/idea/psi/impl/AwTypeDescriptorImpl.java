@@ -9,6 +9,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static juuxel.accesswidener.idea.psi.AwTypes.*;
 import juuxel.accesswidener.idea.psi.*;
+import com.intellij.psi.PsiType;
 
 public class AwTypeDescriptorImpl extends AwReferencingElementImpl implements AwTypeDescriptor {
 
@@ -52,6 +53,12 @@ public class AwTypeDescriptorImpl extends AwReferencingElementImpl implements Aw
   @Nullable
   public String getClassName() {
     return AwPsiImplUtil.getClassName(this);
+  }
+
+  @Override
+  @Nullable
+  public PsiType toPsiType() {
+    return AwPsiImplUtil.toPsiType(this);
   }
 
 }

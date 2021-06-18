@@ -62,9 +62,9 @@ classDefinition ::= ACCESS TARGET_TYPE CLASS_NAME
 methodDefinition ::= ACCESS TARGET_TYPE CLASS_NAME MEMBER_NAME methodDescriptor {pin=5}
 fieldDefinition ::= ACCESS TARGET_TYPE CLASS_NAME MEMBER_NAME typeDescriptor {pin=5}
 
-fake memberDefinition ::= {methods=[getOwner getMemberIdentifier]}
+fake memberDefinition ::= {methods=[getOwner getMemberIdentifier getName]}
 fake definition ::= {methods=[getAccessType getName]}
 
 methodDescriptor ::= L_PAREN typeDescriptor* R_PAREN typeDescriptor {methods=[getReturnType getParameters]}
-typeDescriptor ::= literalTypeDescriptor_|PRIMITIVE_DESCRIPTOR|ARRAY typeDescriptor {methods=[getDescriptorString isPrimitive isLiteral getClassName]}
+typeDescriptor ::= literalTypeDescriptor_|PRIMITIVE_DESCRIPTOR|ARRAY typeDescriptor {methods=[getDescriptorString isPrimitive isLiteral getClassName toPsiType]}
 private literalTypeDescriptor_ ::= LITERAL_START CLASS_NAME SEMICOLON

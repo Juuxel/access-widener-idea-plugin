@@ -1,7 +1,9 @@
 package juuxel.accesswidener.idea.psi.impl
 
 import com.intellij.lang.ASTNode
+import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiType
 import com.intellij.psi.tree.IElementType
 import juuxel.accesswidener.idea.AccessType
 import juuxel.accesswidener.idea.psi.AwClassDefinition
@@ -11,6 +13,7 @@ import juuxel.accesswidener.idea.psi.AwMemberDefinition
 import juuxel.accesswidener.idea.psi.AwMethodDescriptor
 import juuxel.accesswidener.idea.psi.AwTypeDescriptor
 import juuxel.accesswidener.idea.psi.AwTypes
+import juuxel.accesswidener.idea.util.Types
 
 object AwPsiImplUtil {
     private inline fun <T> ofChild(elt: PsiElement, type: IElementType, fn: (ASTNode) -> T): T? =
@@ -41,14 +44,19 @@ object AwPsiImplUtil {
         }
 
     // AwMemberDefinition
+    // getOwner and getMemberIdentifier are guaranteed to be nonnull because they are pinned on their descriptors
 
     @JvmStatic
-    fun getOwner(definition: AwMemberDefinition): String? =
-        textOfChild(definition, AwTypes.CLASS_NAME)
+    fun getOwner(definition: AwMemberDefinition): String =
+        textOfChild(definition, AwTypes.CLASS_NAME)!!
 
     @JvmStatic
-    fun getMemberIdentifier(definition: AwMemberDefinition): PsiElement? =
-        ofChild(definition, AwTypes.MEMBER_NAME, ASTNode::getPsi)
+    fun getMemberIdentifier(definition: AwMemberDefinition): PsiElement =
+        ofChild(definition, AwTypes.MEMBER_NAME, ASTNode::getPsi)!!
+
+    @JvmStatic
+    fun getName(definition: AwMemberDefinition): String =
+        textOfChild(definition, AwTypes.MEMBER_NAME)!!
 
     // AwHeader
 
@@ -76,7 +84,28 @@ object AwPsiImplUtil {
 
     @JvmStatic
     fun getClassName(descriptor: AwTypeDescriptor): String? =
-        textOfChild(descriptor, AwTypes.CLASS_NAME)
+        textOfChild(descriptor, AwTypes.CLASS_NAME)?.let(Types::toJavaName)
+
+    @JvmStatic
+    fun toPsiType(descriptor: AwTypeDescriptor): PsiType? =
+        if (isPrimitive(descriptor)) {
+            when (val desc = descriptor.descriptorString) {
+                "B" -> PsiType.BYTE
+                "S" -> PsiType.SHORT
+                "I" -> PsiType.INT
+                "J" -> PsiType.LONG
+                "F" -> PsiType.FLOAT
+                "D" -> PsiType.DOUBLE
+                "Z" -> PsiType.BOOLEAN
+                "V" -> PsiType.VOID
+                else -> error("Unknown primitive descriptor: $desc")
+            }
+        } else {
+            getClassName(descriptor)?.let { name ->
+                JavaPsiFacade.getElementFactory(descriptor.project)
+                    .createTypeByFQClassName(name)
+            }
+        }
 
     // AwMethodDescriptor
 
