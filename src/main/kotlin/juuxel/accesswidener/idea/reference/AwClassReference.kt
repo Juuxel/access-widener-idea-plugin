@@ -10,7 +10,8 @@ import com.intellij.psi.PsiReferenceBase
 import com.intellij.psi.ResolveResult
 import com.intellij.psi.search.GlobalSearchScope
 
-class AwClassReference(element: PsiElement, textRange: TextRange) : PsiReferenceBase<PsiElement>(element, textRange),
+class AwClassReference(element: PsiElement, textRange: TextRange) :
+    PsiReferenceBase<PsiElement>(element, textRange),
     PsiPolyVariantReference {
     private val binaryName = textRange.substring(element.text)
     // If you have a manual $ in your class names, you are evil.
