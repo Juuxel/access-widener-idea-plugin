@@ -11,6 +11,7 @@ import com.intellij.psi.PsiReferenceBase
 import com.intellij.psi.ResolveResult
 import com.intellij.psi.search.GlobalSearchScope
 import juuxel.accesswidener.idea.util.Types
+import juuxel.accesswidener.idea.util.moduleScope
 
 abstract class AwReference(element: PsiElement, textRange: TextRange) :
     PsiReferenceBase<PsiElement>(element, textRange),
@@ -23,15 +24,7 @@ abstract class AwReference(element: PsiElement, textRange: TextRange) :
     protected abstract fun getReferenceTargets(c: PsiClass, soft: Boolean): Sequence<PsiElement>
 
     override fun multiResolve(incompleteCode: Boolean): Array<ResolveResult> {
-        val scope = run {
-            val module = ModuleUtilCore.findModuleForPsiElement(element)
-
-            if (module != null) {
-                GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module)
-            } else {
-                GlobalSearchScope.allScope(element.project)
-            }
-        }
+        val scope = element.moduleScope
 
         return JavaPsiFacade.getInstance(element.project)
             .findClasses(javaName, scope)
