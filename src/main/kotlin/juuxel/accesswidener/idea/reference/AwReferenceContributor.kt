@@ -1,4 +1,4 @@
-package juuxel.accesswidener.idea.completion
+package juuxel.accesswidener.idea.reference
 
 import com.intellij.patterns.PlatformPatterns
 import com.intellij.patterns.StandardPatterns
@@ -11,7 +11,6 @@ import com.intellij.psi.tree.TokenSet
 import com.intellij.util.ProcessingContext
 import juuxel.accesswidener.idea.psi.AwDefinition
 import juuxel.accesswidener.idea.psi.AwTypes
-import juuxel.accesswidener.idea.reference.AwClassReference
 
 class AwReferenceContributor : PsiReferenceContributor() {
     override fun registerReferenceProviders(registrar: PsiReferenceRegistrar) {
