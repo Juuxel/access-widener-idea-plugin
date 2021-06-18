@@ -39,6 +39,8 @@
 
         <colorSettingsPage implementation="juuxel.accesswidener.idea.syntaxhighlighting.AccessWidenerColorSettingsPage"/>
 
+        <lang.commenter language="AccessWidener" implementationClass="juuxel.accesswidener.idea.AwCommenter"/>
+
         <localInspection language="AccessWidener"
                          displayName="Invalid access type"
                          groupName="Access wideners"
