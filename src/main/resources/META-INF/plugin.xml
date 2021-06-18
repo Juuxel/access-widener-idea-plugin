@@ -29,6 +29,9 @@
         <completion.contributor language="AccessWidener"
                                 implementationClass="juuxel.accesswidener.idea.completion.AwCompletionContributor"/>
 
+        <psi.referenceContributor language="AccessWidener"
+                                  implementation="juuxel.accesswidener.idea.completion.AwReferenceContributor"/>
+
         <lang.syntaxHighlighterFactory language="AccessWidener"
                                        implementationClass="juuxel.accesswidener.idea.syntaxhighlighting.AccessWidenerSyntaxHighlighterFactory"/>
 

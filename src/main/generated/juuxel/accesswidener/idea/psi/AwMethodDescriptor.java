@@ -10,7 +10,7 @@ public interface AwMethodDescriptor extends PsiElement {
   @NotNull
   List<AwTypeDescriptor> getTypeDescriptorList();
 
-  AwTypeDescriptor getReturnType();
+  @NotNull AwTypeDescriptor getReturnType();
 
   @NotNull List<AwTypeDescriptor> getParameters();
 

@@ -8,12 +8,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static juuxel.accesswidener.idea.psi.AwTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import juuxel.accesswidener.idea.psi.*;
 
-public class AwTypeDescriptorImpl extends ASTWrapperPsiElement implements AwTypeDescriptor {
+public class AwTypeDescriptorImpl extends AwReferencingElementImpl implements AwTypeDescriptor {
 
-  public AwTypeDescriptorImpl(@NotNull ASTNode node) {
+  public AwTypeDescriptorImpl(ASTNode node) {
     super(node);
   }
 

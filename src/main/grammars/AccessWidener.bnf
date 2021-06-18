@@ -16,6 +16,7 @@
     // Extensions
     extends("(class|member)Definition")=definition
     extends("(method|field)Definition")=memberDefinition
+    mixin("definition|typeDescriptor")="AwReferencingElementImpl"
 
     generateTokenAccessors=false
     tokens=[

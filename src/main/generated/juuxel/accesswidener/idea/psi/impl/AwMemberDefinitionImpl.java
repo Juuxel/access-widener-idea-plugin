@@ -12,7 +12,7 @@ import juuxel.accesswidener.idea.psi.*;
 
 public class AwMemberDefinitionImpl extends AwDefinitionImpl implements AwMemberDefinition {
 
-  public AwMemberDefinitionImpl(@NotNull ASTNode node) {
+  public AwMemberDefinitionImpl(ASTNode node) {
     super(node);
   }
 

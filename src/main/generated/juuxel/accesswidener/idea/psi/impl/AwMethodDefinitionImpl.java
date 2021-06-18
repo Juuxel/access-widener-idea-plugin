@@ -12,7 +12,7 @@ import juuxel.accesswidener.idea.psi.*;
 
 public class AwMethodDefinitionImpl extends AwMemberDefinitionImpl implements AwMethodDefinition {
 
-  public AwMethodDefinitionImpl(@NotNull ASTNode node) {
+  public AwMethodDefinitionImpl(ASTNode node) {
     super(node);
   }
 

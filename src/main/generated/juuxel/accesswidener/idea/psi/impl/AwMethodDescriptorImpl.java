@@ -34,7 +34,7 @@ public class AwMethodDescriptorImpl extends ASTWrapperPsiElement implements AwMe
   }
 
   @Override
-  public AwTypeDescriptor getReturnType() {
+  public @NotNull AwTypeDescriptor getReturnType() {
     return AwPsiImplUtil.getReturnType(this);
   }
 
