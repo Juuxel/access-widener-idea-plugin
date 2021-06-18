@@ -13,6 +13,7 @@ import juuxel.accesswidener.idea.psi.AwDefinition
 import juuxel.accesswidener.idea.psi.AwFieldDefinition
 import juuxel.accesswidener.idea.psi.AwMethodDefinition
 import juuxel.accesswidener.idea.psi.AwTypes
+import juuxel.accesswidener.idea.psi.util.isInNamedAw
 
 class AwReferenceContributor : PsiReferenceContributor() {
     override fun registerReferenceProviders(registrar: PsiReferenceRegistrar) {
@@ -26,6 +27,8 @@ class AwReferenceContributor : PsiReferenceContributor() {
                     element: PsiElement,
                     context: ProcessingContext
                 ): Array<PsiReference> {
+                    if (!element.isInNamedAw) return PsiReference.EMPTY_ARRAY
+
                     val refs = element.node.getChildren(CLASS_NAME_TOKENS)
                         .map {
                             val name = it.psi
@@ -44,6 +47,8 @@ class AwReferenceContributor : PsiReferenceContributor() {
                     element: PsiElement,
                     context: ProcessingContext
                 ): Array<PsiReference> {
+                    if (!element.isInNamedAw) return PsiReference.EMPTY_ARRAY
+
                     return arrayOf(
                         AwFieldReference(element, (element as AwFieldDefinition).memberIdentifier.textRangeInParent)
                     )
@@ -58,6 +63,8 @@ class AwReferenceContributor : PsiReferenceContributor() {
                     element: PsiElement,
                     context: ProcessingContext
                 ): Array<PsiReference> {
+                    if (!element.isInNamedAw) return PsiReference.EMPTY_ARRAY
+
                     return arrayOf(
                         AwMethodReference(element, (element as AwMethodDefinition).memberIdentifier.textRangeInParent)
                     )
