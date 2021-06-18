@@ -97,6 +97,7 @@ object AwPsiImplUtil {
                 "F" -> PsiType.FLOAT
                 "D" -> PsiType.DOUBLE
                 "Z" -> PsiType.BOOLEAN
+                "C" -> PsiType.CHAR
                 "V" -> PsiType.VOID
                 else -> error("Unknown primitive descriptor: $desc")
             }

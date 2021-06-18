@@ -42,7 +42,7 @@
 
         CLASS_NAME="regexp:[a-zA-Z0-9-_$/]+"
         MEMBER_NAME="regexp:[a-zA-Z0-9-_$<>]+"
-        PRIMITIVE_DESCRIPTOR="regexp:[BSIJFDZV]"
+        PRIMITIVE_DESCRIPTOR="regexp:[BSIJFDZCV]"
 
         COMMENT="regexp:#.+"
         //HS="regexp:[ \t]+"
