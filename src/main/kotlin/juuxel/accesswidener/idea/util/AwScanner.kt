@@ -16,7 +16,7 @@ import juuxel.accesswidener.idea.psi.AwMethodDefinition
 
 object AwScanner {
     private fun findDefinitionsInModule(psi: PsiElement): Sequence<AwDefinition> =
-        FileTypeIndex.getFiles(AccessWidenerFileType, psi.moduleScope)
+        FileTypeIndex.getFiles(AccessWidenerFileType, psi.getModuleScope(false))
             .asSequence()
             .mapNotNull { PsiManager.getInstance(psi.project).findFile(it) as? AwFile }
             .flatMap { PsiTreeUtil.getChildrenOfTypeAsList(it, AwDefinition::class.java) }

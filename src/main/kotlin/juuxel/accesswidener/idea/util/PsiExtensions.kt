@@ -10,16 +10,23 @@ import com.intellij.psi.util.TypeConversionUtil
 // This file contains extensions for generic PSI elements, such as the Java PSI.
 // AW-specific extensions are in psi.util.Extensions.kt.
 
-val PsiElement.moduleScope: GlobalSearchScope
-    get() {
-        val module = ModuleUtilCore.findModuleForPsiElement(this)
+fun PsiElement.getModuleScope(includeDependencies: Boolean): GlobalSearchScope {
+    val module = ModuleUtilCore.findModuleForPsiElement(this)
 
-        return if (module != null) {
+    return if (module != null) {
+        if (includeDependencies) {
             GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module)
         } else {
+            GlobalSearchScope.moduleScope(module)
+        }
+    } else {
+        if (includeDependencies) {
             GlobalSearchScope.allScope(project)
+        } else {
+            GlobalSearchScope.projectScope(project)
         }
     }
+}
 
 fun PsiMethod.erasure(): PsiMethod {
     val factory = JavaPsiFacade.getElementFactory(project)
