@@ -68,6 +68,13 @@ object AwPsiImplUtil {
     fun getPresentation(definition: AwDefinition): ItemPresentation? =
         ItemPresentationProviders.getItemPresentation(definition)
 
+    @JvmStatic
+    fun getQualifiedName(definition: AwDefinition): String? =
+        when (definition) {
+            is AwMemberDefinition -> definition.owner + '.' + definition.name
+            else -> definition.name
+        }
+
     // AwMemberDefinition
     // All methods are guaranteed to be nonnull because members are pinned on their descriptors
 

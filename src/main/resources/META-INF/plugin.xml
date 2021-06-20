@@ -47,6 +47,9 @@
         <itemPresentationProvider forClass="juuxel.accesswidener.idea.psi.AwDefinition"
                                   implementationClass="juuxel.accesswidener.idea.psi.presentation.AwDefinitionPresenter"/>
 
+        <lang.psiStructureViewFactory language="AccessWidener"
+                                      implementationClass="juuxel.accesswidener.idea.structure.AwStructureViewFactory"/>
+
         <!-- All inspections, ordered alphabetically -->
 
         <localInspection language="AccessWidener"

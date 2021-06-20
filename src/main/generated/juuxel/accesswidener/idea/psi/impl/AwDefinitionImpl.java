@@ -43,6 +43,12 @@ public class AwDefinitionImpl extends AwReferencingElementImpl implements AwDefi
   }
 
   @Override
+  @Nullable
+  public String getQualifiedName() {
+    return AwPsiImplUtil.getQualifiedName(this);
+  }
+
+  @Override
   @NotNull
   public Icon getIcon(@IconFlags int flags) {
     return AwPsiImplUtil.getIcon(this, flags);

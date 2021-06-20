@@ -18,6 +18,9 @@ public interface AwDefinition extends NavigatablePsiElement {
   @Nullable
   String getName();
 
+  @Nullable
+  String getQualifiedName();
+
   @NotNull
   Icon getIcon(@IconFlags int flags);
 

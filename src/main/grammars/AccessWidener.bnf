@@ -64,7 +64,7 @@ methodDefinition ::= ACCESS TARGET_TYPE CLASS_NAME MEMBER_NAME methodDescriptor 
 fieldDefinition ::= ACCESS TARGET_TYPE CLASS_NAME MEMBER_NAME typeDescriptor {pin=5}
 
 fake memberDefinition ::= {methods=[getOwner getMemberIdentifier getName getDescriptor]}
-fake definition ::= {methods=[getAccessType getName getIcon getPresentation]}
+fake definition ::= {methods=[getAccessType getName getQualifiedName getIcon getPresentation]}
 
 methodDescriptor ::= L_PAREN typeDescriptor* R_PAREN typeDescriptor {methods=[getReturnType getParameters]}
 typeDescriptor ::= literalTypeDescriptor_|PRIMITIVE_DESCRIPTOR|ARRAY typeDescriptor {methods=[getDescriptorString getKind getClassName toPsiType]}
