@@ -67,5 +67,5 @@ fake memberDefinition ::= {methods=[getOwner getMemberIdentifier getName getDesc
 fake definition ::= {methods=[getAccessType getName getIcon getPresentation]}
 
 methodDescriptor ::= L_PAREN typeDescriptor* R_PAREN typeDescriptor {methods=[getReturnType getParameters]}
-typeDescriptor ::= literalTypeDescriptor_|PRIMITIVE_DESCRIPTOR|ARRAY typeDescriptor {methods=[getDescriptorString isPrimitive isLiteral getClassName toPsiType]}
+typeDescriptor ::= literalTypeDescriptor_|PRIMITIVE_DESCRIPTOR|ARRAY typeDescriptor {methods=[getDescriptorString getKind getClassName toPsiType]}
 private literalTypeDescriptor_ ::= LITERAL_START CLASS_NAME SEMICOLON

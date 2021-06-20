@@ -5,6 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiType;
+import juuxel.accesswidener.idea.psi.util.TypeDescriptorKind;
 
 public interface AwTypeDescriptor extends PsiElement {
 
@@ -14,9 +15,8 @@ public interface AwTypeDescriptor extends PsiElement {
   @NotNull
   String getDescriptorString();
 
-  boolean isPrimitive();
-
-  boolean isLiteral();
+  @NotNull
+  TypeDescriptorKind getKind();
 
   @Nullable
   String getClassName();

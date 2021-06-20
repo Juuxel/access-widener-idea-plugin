@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static juuxel.accesswidener.idea.psi.AwTypes.*;
 import juuxel.accesswidener.idea.psi.*;
 import com.intellij.psi.PsiType;
+import juuxel.accesswidener.idea.psi.util.TypeDescriptorKind;
 
 public class AwTypeDescriptorImpl extends AwReferencingElementImpl implements AwTypeDescriptor {
 
@@ -40,13 +41,9 @@ public class AwTypeDescriptorImpl extends AwReferencingElementImpl implements Aw
   }
 
   @Override
-  public boolean isPrimitive() {
-    return AwPsiImplUtil.isPrimitive(this);
-  }
-
-  @Override
-  public boolean isLiteral() {
-    return AwPsiImplUtil.isLiteral(this);
+  @NotNull
+  public TypeDescriptorKind getKind() {
+    return AwPsiImplUtil.getKind(this);
   }
 
   @Override

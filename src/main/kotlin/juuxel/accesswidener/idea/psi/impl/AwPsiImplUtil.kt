@@ -19,6 +19,7 @@ import juuxel.accesswidener.idea.psi.AwMethodDefinition
 import juuxel.accesswidener.idea.psi.AwMethodDescriptor
 import juuxel.accesswidener.idea.psi.AwTypeDescriptor
 import juuxel.accesswidener.idea.psi.AwTypes
+import juuxel.accesswidener.idea.psi.util.TypeDescriptorKind
 import juuxel.accesswidener.idea.util.Types
 import javax.swing.Icon
 
@@ -107,12 +108,12 @@ object AwPsiImplUtil {
         descriptor.text
 
     @JvmStatic
-    fun isPrimitive(descriptor: AwTypeDescriptor): Boolean =
-        descriptor.node.findChildByType(AwTypes.PRIMITIVE_DESCRIPTOR) != null
-
-    @JvmStatic
-    fun isLiteral(descriptor: AwTypeDescriptor): Boolean =
-        !isPrimitive(descriptor)
+    fun getKind(descriptor: AwTypeDescriptor): TypeDescriptorKind =
+        when {
+            descriptor.node.findChildByType(AwTypes.ARRAY) != null -> TypeDescriptorKind.ARRAY
+            descriptor.node.findChildByType(AwTypes.PRIMITIVE_DESCRIPTOR) != null -> TypeDescriptorKind.PRIMITIVE
+            else -> TypeDescriptorKind.LITERAL
+        }
 
     @JvmStatic
     fun getClassName(descriptor: AwTypeDescriptor): String? =
@@ -120,8 +121,8 @@ object AwPsiImplUtil {
 
     @JvmStatic
     fun toPsiType(descriptor: AwTypeDescriptor): PsiType? =
-        if (isPrimitive(descriptor)) {
-            when (val desc = descriptor.descriptorString) {
+        when (descriptor.kind) {
+            TypeDescriptorKind.PRIMITIVE -> when (val desc = descriptor.descriptorString) {
                 "B" -> PsiType.BYTE
                 "S" -> PsiType.SHORT
                 "I" -> PsiType.INT
@@ -133,11 +134,13 @@ object AwPsiImplUtil {
                 "V" -> PsiType.VOID
                 else -> error("Unknown primitive descriptor: $desc")
             }
-        } else {
-            getClassName(descriptor)?.let { name ->
+
+            TypeDescriptorKind.LITERAL -> getClassName(descriptor)?.let { name ->
                 JavaPsiFacade.getElementFactory(descriptor.project)
                     .createTypeByFQClassName(name)
             }
+
+            TypeDescriptorKind.ARRAY -> descriptor.typeDescriptor?.toPsiType()?.createArrayType()
         }
 
     // AwMethodDescriptor
