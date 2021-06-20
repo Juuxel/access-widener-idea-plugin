@@ -44,6 +44,9 @@
         <codeInsight.lineMarkerProvider language="JAVA"
                                         implementationClass="juuxel.accesswidener.idea.gutter.WidenedAccessLineMarkerProvider"/>
 
+        <itemPresentationProvider forClass="juuxel.accesswidener.idea.psi.AwDefinition"
+                                  implementationClass="juuxel.accesswidener.idea.psi.presentation.AwDefinitionPresenter"/>
+
         <!-- All inspections, ordered alphabetically -->
 
         <localInspection language="AccessWidener"

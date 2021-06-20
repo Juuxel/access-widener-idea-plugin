@@ -1,6 +1,10 @@
 package juuxel.accesswidener.idea.psi.impl
 
+import com.intellij.icons.AllIcons
 import com.intellij.lang.ASTNode
+import com.intellij.navigation.ItemPresentation
+import com.intellij.navigation.ItemPresentationProviders
+import com.intellij.openapi.util.Iconable
 import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiType
@@ -8,12 +12,15 @@ import com.intellij.psi.tree.IElementType
 import juuxel.accesswidener.idea.AccessType
 import juuxel.accesswidener.idea.psi.AwClassDefinition
 import juuxel.accesswidener.idea.psi.AwDefinition
+import juuxel.accesswidener.idea.psi.AwFieldDefinition
 import juuxel.accesswidener.idea.psi.AwHeader
 import juuxel.accesswidener.idea.psi.AwMemberDefinition
+import juuxel.accesswidener.idea.psi.AwMethodDefinition
 import juuxel.accesswidener.idea.psi.AwMethodDescriptor
 import juuxel.accesswidener.idea.psi.AwTypeDescriptor
 import juuxel.accesswidener.idea.psi.AwTypes
 import juuxel.accesswidener.idea.util.Types
+import javax.swing.Icon
 
 object AwPsiImplUtil {
     private inline fun <T> ofChild(elt: PsiElement, type: IElementType, fn: (ASTNode) -> T): T? =
@@ -43,8 +50,25 @@ object AwPsiImplUtil {
             else -> textOfChild(definition, AwTypes.MEMBER_NAME)
         }
 
+    @JvmStatic
+    fun getIcon(definition: AwDefinition, @Iconable.IconFlags flags: Int): Icon =
+        getIcon(definition)
+
+    @JvmStatic
+    fun getIcon(definition: AwDefinition): Icon =
+        when (definition) {
+            is AwClassDefinition -> AllIcons.Nodes.Class
+            is AwMethodDefinition -> AllIcons.Nodes.Method
+            is AwFieldDefinition -> AllIcons.Nodes.Field
+            else -> throw IllegalArgumentException("Unknown definition: $definition")
+        }
+
+    @JvmStatic
+    fun getPresentation(definition: AwDefinition): ItemPresentation? =
+        ItemPresentationProviders.getItemPresentation(definition)
+
     // AwMemberDefinition
-    // getOwner and getMemberIdentifier are guaranteed to be nonnull because they are pinned on their descriptors
+    // All methods are guaranteed to be nonnull because members are pinned on their descriptors
 
     @JvmStatic
     fun getOwner(definition: AwMemberDefinition): String =
@@ -57,6 +81,14 @@ object AwPsiImplUtil {
     @JvmStatic
     fun getName(definition: AwMemberDefinition): String =
         textOfChild(definition, AwTypes.MEMBER_NAME)!!
+
+    @JvmStatic
+    fun getDescriptor(definition: AwMemberDefinition): PsiElement =
+        when (definition) {
+            is AwMethodDefinition -> definition.methodDescriptor
+            is AwFieldDefinition -> definition.typeDescriptor
+            else -> throw IllegalArgumentException("Unknown AW member: $definition")
+        }
 
     // AwHeader
 

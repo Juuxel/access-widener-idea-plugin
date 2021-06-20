@@ -45,4 +45,10 @@ public class AwMemberDefinitionImpl extends AwDefinitionImpl implements AwMember
     return AwPsiImplUtil.getName(this);
   }
 
+  @Override
+  @NotNull
+  public PsiElement getDescriptor() {
+    return AwPsiImplUtil.getDescriptor(this);
+  }
+
 }

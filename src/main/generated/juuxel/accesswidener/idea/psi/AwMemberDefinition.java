@@ -16,4 +16,7 @@ public interface AwMemberDefinition extends AwDefinition {
   @NotNull
   String getName();
 
+  @NotNull
+  PsiElement getDescriptor();
+
 }
