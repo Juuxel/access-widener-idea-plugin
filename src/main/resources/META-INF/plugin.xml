@@ -57,6 +57,13 @@
                          enabledByDefault="true"
                          level="ERROR"
                          implementationClass="juuxel.accesswidener.idea.inspection.InvalidTargetTypeInspection"/>
+
+        <localInspection language="AccessWidener"
+                         displayName="Incorrect void type"
+                         groupName="Access wideners"
+                         enabledByDefault="true"
+                         level="ERROR"
+                         implementationClass="juuxel.accesswidener.idea.inspection.VoidTypeInspection"/>
     </extensions>
 
     <actions>

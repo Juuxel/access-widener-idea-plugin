@@ -7,7 +7,7 @@ import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry
 
 /**
  * Provides reference searching support.
- * Must be mixed into all referencing elements.
+ * Must be mixed into all elements that are references.
  */
 abstract class AwReferencingElementImpl(node: ASTNode) : ASTWrapperPsiElement(node) {
     override fun getReference(): PsiReference? = references.firstOrNull()
