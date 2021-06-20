@@ -6,6 +6,7 @@ import com.intellij.psi.PsiElementVisitor
 import com.intellij.psi.PsiField
 import juuxel.accesswidener.idea.psi.AwFieldDefinition
 import juuxel.accesswidener.idea.psi.AwVisitor
+import juuxel.accesswidener.idea.psi.util.isInNamedAw
 import juuxel.accesswidener.idea.reference.AwFieldReference
 import juuxel.accesswidener.idea.util.MessageBundle
 import juuxel.accesswidener.idea.util.erasure
@@ -14,6 +15,8 @@ class MismatchingFieldTypeInspection : LocalInspectionTool() {
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor =
         object : AwVisitor() {
             override fun visitFieldDefinition(o: AwFieldDefinition) {
+                if (!o.isInNamedAw) return
+
                 val ref = (o.references.firstOrNull { it is AwFieldReference } ?: return) as AwFieldReference
                 val types = ref.multiResolve(false)
                     .asSequence()
