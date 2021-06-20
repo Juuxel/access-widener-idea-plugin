@@ -8,6 +8,7 @@ import juuxel.accesswidener.idea.psi.AwFieldDefinition
 import juuxel.accesswidener.idea.psi.AwVisitor
 import juuxel.accesswidener.idea.reference.AwFieldReference
 import juuxel.accesswidener.idea.util.MessageBundle
+import juuxel.accesswidener.idea.util.erasure
 
 class MismatchingFieldTypeInspection : LocalInspectionTool() {
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor =
@@ -17,7 +18,7 @@ class MismatchingFieldTypeInspection : LocalInspectionTool() {
                 val types = ref.multiResolve(false)
                     .asSequence()
                     .mapNotNull { it.element as? PsiField }
-                    .map { it.type }
+                    .map { it.type.erasure() }
                     .toList()
 
                 if (types.isNotEmpty() && types.none { it == o.typeDescriptor.toPsiType() }) {
