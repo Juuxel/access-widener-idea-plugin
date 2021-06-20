@@ -61,6 +61,13 @@
                          implementationClass="juuxel.accesswidener.idea.inspection.InvalidTargetTypeInspection"/>
 
         <localInspection language="AccessWidener"
+                         displayName="Mismatching field type"
+                         groupName="Access wideners"
+                         enabledByDefault="true"
+                         level="ERROR"
+                         implementationClass="juuxel.accesswidener.idea.inspection.MismatchingFieldTypeInspection"/>
+
+        <localInspection language="AccessWidener"
                          displayName="Unknown target"
                          groupName="Access wideners"
                          enabledByDefault="true"
