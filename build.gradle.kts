@@ -6,6 +6,9 @@ plugins {
     id("org.jmailen.kotlinter") version "3.4.4"
 }
 
+// TODO: Generate the parser and lexer here.
+//   Currently not possible due to https://github.com/JetBrains/gradle-grammar-kit-plugin/issues/23
+
 group = "io.github.juuxel"
 version = "1.0.0"
 
