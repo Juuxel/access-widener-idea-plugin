@@ -44,6 +44,8 @@
         <codeInsight.lineMarkerProvider language="JAVA"
                                         implementationClass="juuxel.accesswidener.idea.gutter.WidenedAccessLineMarkerProvider"/>
 
+        <!-- All inspections, ordered alphabetically -->
+
         <localInspection language="AccessWidener"
                          displayName="Invalid access type"
                          groupName="Access wideners"
@@ -57,6 +59,13 @@
                          enabledByDefault="true"
                          level="ERROR"
                          implementationClass="juuxel.accesswidener.idea.inspection.InvalidTargetTypeInspection"/>
+
+        <localInspection language="AccessWidener"
+                         displayName="Unknown target"
+                         groupName="Access wideners"
+                         enabledByDefault="true"
+                         level="ERROR"
+                         implementationClass="juuxel.accesswidener.idea.inspection.UnknownTargetInspection"/>
 
         <localInspection language="AccessWidener"
                          displayName="Incorrect void type"
