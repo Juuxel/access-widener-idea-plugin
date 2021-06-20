@@ -41,6 +41,9 @@
 
         <lang.commenter language="AccessWidener" implementationClass="juuxel.accesswidener.idea.AwCommenter"/>
 
+        <codeInsight.lineMarkerProvider language="JAVA"
+                                        implementationClass="juuxel.accesswidener.idea.gutter.WidenedAccessLineMarkerProvider"/>
+
         <localInspection language="AccessWidener"
                          displayName="Invalid access type"
                          groupName="Access wideners"

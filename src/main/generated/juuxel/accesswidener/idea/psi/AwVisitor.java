@@ -4,6 +4,7 @@ package juuxel.accesswidener.idea.psi;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.NavigatablePsiElement;
 
 public class AwVisitor extends PsiElementVisitor {
 
@@ -12,7 +13,7 @@ public class AwVisitor extends PsiElementVisitor {
   }
 
   public void visitDefinition(@NotNull AwDefinition o) {
-    visitPsiElement(o);
+    visitNavigatablePsiElement(o);
   }
 
   public void visitFieldDefinition(@NotNull AwFieldDefinition o) {
@@ -37,6 +38,10 @@ public class AwVisitor extends PsiElementVisitor {
 
   public void visitTypeDescriptor(@NotNull AwTypeDescriptor o) {
     visitPsiElement(o);
+  }
+
+  public void visitNavigatablePsiElement(@NotNull NavigatablePsiElement o) {
+    visitElement(o);
   }
 
   public void visitPsiElement(@NotNull PsiElement o) {

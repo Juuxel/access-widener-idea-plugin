@@ -16,6 +16,7 @@
     // Extensions
     extends("(class|member)Definition")=definition
     extends("(method|field)Definition")=memberDefinition
+    implements("definition")="com.intellij.psi.NavigatablePsiElement"
     mixin("definition|typeDescriptor")="AwReferencingElementImpl"
 
     generateTokenAccessors=false

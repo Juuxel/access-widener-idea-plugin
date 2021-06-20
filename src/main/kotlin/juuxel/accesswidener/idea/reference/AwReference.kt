@@ -1,6 +1,5 @@
 package juuxel.accesswidener.idea.reference
 
-import com.intellij.openapi.module.ModuleUtilCore
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiClass
